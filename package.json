@@ -2,9 +2,11 @@
   "name": "mid-uti1s",
   "version": "1.0.0",
   "description": "utils",
-  "main": "src/index.js",
+  "main": "dist/mid-uti1s.cjs",
+  "module": "dist/mid-uti1s.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build && tsc -p tsconfig.build.json"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@types/node": "^20.8.9"
+    "@types/node": "^20.8.9",
+    "vite": "^4.5.0"
   }
 }
