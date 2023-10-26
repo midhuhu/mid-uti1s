@@ -2,8 +2,22 @@
   "name": "mid-uti1s",
   "version": "1.0.0",
   "description": "utils",
-  "main": "dist/mid-uti1s.cjs",
-  "module": "dist/mid-uti1s.mjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./*": "./*",
+    "./vite": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
   "scripts": {
     "build": "vite build && tsc -p tsconfig.build.json"
   },
