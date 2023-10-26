@@ -5,7 +5,6 @@
   "main": "dist/mid-uti1s.cjs",
   "module": "dist/mid-uti1s.mjs",
   "scripts": {
-    "dev": "vite",
     "build": "vite build && tsc -p tsconfig.build.json"
   },
   "repository": {
