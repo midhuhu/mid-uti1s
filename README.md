@@ -44,3 +44,6 @@ utils.getType(11)   // 获取类型`number`
 | isMd5             | md5格式(32位)                                                                    | 2023-10-30 |
 | isVersion         | 版本号(version)格式必须为X.Y.Z                                                   | 2023-10-30 |
 | isComplexPassword | 密码强度校验， 最少6位， 包括至少1个大写字母， 1个小写字母，1个数字，1个特殊字符 | 2023-10-30 |
+| getHumpCode | 横线命名转小驼峰格式: mid-utils => midUtils | 2023-11-03 |
+| getLineCode | 小驼峰命名转横向格式：midUtils => mid-utils | 2023-11-03 |
+| getCapitalize | 首字母大写 | 2023-11-03 |

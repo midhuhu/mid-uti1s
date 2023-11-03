@@ -4,4 +4,7 @@ export interface Utils {
     isMd5(value: string): boolean
     isVersion(value: string): boolean
     isComplexPassword(value: string): boolean
+    getHumpCode(value: string): string
+    getLineCode(value: string): string
+    getCapitalize(value: string): string
 } 

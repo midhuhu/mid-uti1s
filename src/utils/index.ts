@@ -53,4 +53,28 @@ export default <Utils>{
     isComplexPassword(value: string): boolean {
         return /^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/.test(value)
     },
+    /**
+     * 横线命名转小驼峰格式: mid-utils => midUtils
+     * @param value 
+     */
+    getHumpCode(value: string) {
+        let camelizeRE = /-(\w)/g;
+        return value.replace(camelizeRE, function (_, c) {
+            return c ? c.toUpperCase() : '';
+        })
+    },
+    /**
+     * 小驼峰命名转横向格式：midUtils => mid-utils
+     * @param value 
+     */
+    getLineCode(value: string) {
+        let hyphenateRE = /\B([A-Z])/g;
+        return value.replace(hyphenateRE, '-$1').toLowerCase()
+    },
+    /**
+     * 首字母大写
+     */
+    getCapitalize(value: string) {
+        return value.charAt(0).toUpperCase() + value.slice(1)
+    }
 }
