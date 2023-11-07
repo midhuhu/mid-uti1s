@@ -76,5 +76,92 @@ export default <Utils>{
      */
     getCapitalize(value: string) {
         return value.charAt(0).toUpperCase() + value.slice(1)
-    }
+    },
+    /**
+     * 校验身份证号码是否合法
+     * @param identityId
+     */
+    checkIdentityId(identityId: string) {
+        if (identityId.length !== 18) {
+            return false
+        }
+        const numbers = identityId.split('').map(Number)
+        const validator = numbers.pop()
+        const factors = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+        const toMod = factors.map((factor, i) => factor * numbers[i]).reduce((sum, item) => sum + item, 0)
+        const mod = toMod % 11
+        const results = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']
+        return String(validator) === String(results[mod])
+    },
+    /**
+     * 数字转中文
+     * @param val
+     */
+    numberChinese(val: number) {
+        const chnNumChar = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+        const chnUnitSection = ['', '万', '亿', '万亿', '亿亿'];
+        const chnUnitChar = ['', '十', '百', '千'];
+        const numToChn = function (num: number) {
+            const index = num.toString().indexOf('.');
+            if (index != -1) {
+                var str = num.toString().slice(index);
+                var a = '点';
+                for (var i = 1; i < str.length; i++) {
+                    a += chnNumChar[parseInt(str[i])];
+                }
+                return a;
+            } else {
+                return '';
+            }
+        }
+
+        function sectionToChinese(section: number) {
+            let str = '', chnstr = '', zero = false, count = 0;
+            while (section > 0) {
+                let v = section % 10;
+                if (v == 0) {
+                    if (zero) {
+                        zero = false;
+                        chnstr = chnNumChar[v] + chnstr;
+                    }
+                } else {
+                    zero = true;
+                    str = chnNumChar[v];
+                    str += chnUnitChar[count];
+                    chnstr = str + chnstr;
+                }
+                count++;
+                section = Math.floor(section / 10);
+            }
+            return chnstr;
+        }
+
+        function TransformToChinese(num: number) {
+            const str = numToChn(num);
+            num = Math.floor(num);
+            let unitPos = 0;
+            let strIns = '';
+            let chnStr = '';
+            let needZero = false;
+
+            if (num === 0) {
+                return chnNumChar[0];
+            }
+            while (num > 0) {
+                const section = num % 10000;
+                if (needZero) {
+                    chnStr = chnNumChar[0] + chnStr;
+                }
+                strIns = sectionToChinese(section);
+                strIns += (section !== 0) ? chnUnitSection[unitPos] : chnUnitSection[0];
+                chnStr = strIns + chnStr;
+                needZero = (section < 1000) && (section > 0);
+                num = Math.floor(num / 10000);
+                unitPos++;
+            }
+            return chnStr + str;
+        }
+        return TransformToChinese(val)
+    },
+
 }

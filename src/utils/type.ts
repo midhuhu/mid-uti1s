@@ -7,4 +7,6 @@ export interface Utils {
     getHumpCode(value: string): string
     getLineCode(value: string): string
     getCapitalize(value: string): string
+    checkIdentityId(identityId: string): boolean
+    numberChinese(val: number): string
 } 

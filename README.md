@@ -47,3 +47,5 @@ utils.getType(11)   // 获取类型`number`
 | getHumpCode | 横线命名转小驼峰格式: mid-utils => midUtils | 2023-11-03 |
 | getLineCode | 小驼峰命名转横向格式：midUtils => mid-utils | 2023-11-03 |
 | getCapitalize | 首字母大写 | 2023-11-03 |
+| checkIdentityId | 校验身份证号码是否合法 | 2023-11-07 |
+| numberChinese | 数字转中文 | 2023-11-07 |
