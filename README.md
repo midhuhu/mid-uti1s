@@ -49,3 +49,4 @@ utils.getType(11)   // 获取类型`number`
 | getCapitalize | 首字母大写 | 2023-11-03 |
 | checkIdentityId | 校验身份证号码是否合法 | 2023-11-07 |
 | numberChinese | 数字转中文 | 2023-11-07 |
+| formatCss | 格式化CSS样式代码 | 2023-11-13 |

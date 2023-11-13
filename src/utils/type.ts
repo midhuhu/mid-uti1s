@@ -9,4 +9,5 @@ export interface Utils {
     getCapitalize(value: string): string
     checkIdentityId(identityId: string): boolean
     numberChinese(val: number): string
+    formatCss(value: string): string
 } 
