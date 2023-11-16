@@ -177,7 +177,36 @@ export default <Utils>{
         s = s.replace(/([^\s])\}([^\n]*)/g, "$1\n}\n$2");
         s = s.replace(/([^\s]);([^\s\}])/g, "$1;\n\t$2");
         return s;
+    },
+    /**
+     * 生成指定范围内的随机数字
+     * @param min
+     * @param max
+     * @returns {*}
+     */
+    randomNumber(min: number, max: number) {
+        // Math.floor() 向下取整
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    /**
+     * 数字千分位分割
+     * @param num
+     * @returns {string|*}
+     */
+    formatThousands(num: number) {
+        var number = num.toString();
+        var length = number.length;
+        if (length <= 3) {
+            return num;
+        }
+        var temp = "";
+        var remainder = length % 3;
+        if (remainder > 0) {
+            // 不是3的整数
+            return number.slice(0, remainder) + "," + number.slice(remainder, length).match(/\d{3}/g)?.join(",") + temp;
+        } else {
+            return number.slice(0, length).match(/\d{3}/g)?.join(",") + temp;
+        }
     }
-
 
 }

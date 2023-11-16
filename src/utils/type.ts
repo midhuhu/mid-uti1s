@@ -7,7 +7,9 @@ export interface Utils {
     getHumpCode(value: string): string
     getLineCode(value: string): string
     getCapitalize(value: string): string
-    checkIdentityId(identityId: string): boolean
-    numberChinese(val: number): string
+    checkIdentityId(value: string): boolean
+    numberChinese(value: number): string
     formatCss(value: string): string
+    randomNumber(min: number, max: number): number
+    formatThousands(value: number): string
 } 
