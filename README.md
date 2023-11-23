@@ -52,3 +52,6 @@ utils.getType(11)   // 获取类型`number`
 | formatCss | 格式化CSS样式代码 | 2023-11-13 |
 | randomNumber | 生成指定范围内的随机数字 | 2023-11-16 |
 | formatThousands | 数字千分位分割 | 2023-11-16 |
+| telFormat | 手机号中间四位变成* | 2023-11-23 |
+| checkIdentityIdPro | 校验身份证号码是否合法-Pro | 2023-11-23 |
+

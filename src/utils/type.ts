@@ -12,4 +12,6 @@ export interface Utils {
     formatCss(value: string): string
     randomNumber(min: number, max: number): number
     formatThousands(value: number): string
+    telFormat(value: number): string
+    checkIdentityIdPro(value: string): boolean
 } 

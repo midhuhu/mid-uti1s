@@ -207,6 +207,90 @@ export default <Utils>{
         } else {
             return number.slice(0, length).match(/\d{3}/g)?.join(",") + temp;
         }
+    },
+    /**
+     * 手机号中间四位变成*
+     * @param value
+     * @returns {string}
+     */
+    telFormat(value: number) {
+        return JSON.stringify(value).slice(0, 3) + "****" + JSON.stringify(value).slice(7);
+    },
+    /**
+     * 身份证号码合法校验
+     * @param num 身份证号码
+     * @returns {boolean}
+     */
+    checkIdentityIdPro(num: string) {
+        if (!num) {
+            return false;
+        }
+        num = num.toUpperCase();
+        // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X。
+        const idCardRegex = /(^\d{15}$)|(^\d{17}([0-9]|X)$)/;
+        if (!idCardRegex.test(num)) {
+            return false;
+        }
+        // 验证前2位，城市符合
+        const validCityCodes: string[] = [
+            "11", "12", "13", "14", "15", "21", "22", "23", "31", "32",
+            "33", "34", "35", "36", "37", "41", "42", "43", "44", "45",
+            "46", "50", "51", "52", "53", "54", "61", "62", "63", "64",
+            "65", "71", "81", "82", "91"
+        ];
+        if (!validCityCodes.includes(num.slice(0, 2))) {
+            return false;
+        }
+        // 下面分别分析出生日期和校验位
+        let len: number;
+        len = num.length;
+        if (len === 15) {
+            // 15位身份证验证
+            const re = /^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/;
+            const match = num.match(re);
+
+            if (!match) {
+                return false;
+            }
+            const [, year, month, day] = match.map(Number);
+            const dtmBirth = new Date(`19${year}/${month}/${day}`);
+            if (
+                dtmBirth.getFullYear() !== 1900 + year ||
+                dtmBirth.getMonth() + 1 !== month ||
+                dtmBirth.getDate() !== day
+            ) {
+                return false;
+            }
+        } else if (len === 18) {
+            // 18位身份证验证
+            const re = /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/;
+            const match = num.match(re);
+            if (!match) {
+                return false;
+            }
+            const [, year, month, day] = match.slice(1, 5).map(Number);
+            const dtmBirth = new Date(`${year}/${month}/${day}`);
+            if (
+                dtmBirth.getFullYear() !== year ||
+                dtmBirth.getMonth() + 1 !== month ||
+                dtmBirth.getDate() !== day
+            ) {
+                return false;
+            }
+            // 校验18位身份证的校验码是否正确
+            const arrInt = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+            const arrCh = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+            let nTemp = 0;
+            for (let i = 0; i < 17; i++) {
+                nTemp += parseInt(num.charAt(i)) * arrInt[i];
+            }
+            if (arrCh[nTemp % 11] !== num.charAt(17)) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
     }
 
 }
