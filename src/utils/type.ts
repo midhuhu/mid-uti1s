@@ -14,4 +14,6 @@ export interface Utils {
     formatThousands(value: number): string
     telFormat(value: number): string
     checkIdentityIdPro(value: string): boolean
+    haveCNChars(value: string): boolean
+    isEmail(value: string): boolean
 } 

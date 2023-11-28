@@ -291,6 +291,22 @@ export default <Utils>{
             return false;
         }
         return true;
+    },
+    /**
+     * 是否包含中文判断
+     * @param value 一段字符串
+     * @returns {boolean}
+     */
+    haveCNChars(value: string) {
+        return /[\u4e00-\u9fa5]/.test(value);
+    },
+    /**
+     * 是否为正确邮箱地址
+     * @param value
+     * @returns {boolean}
+     */
+    isEmail(value: string) {
+        return /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value);
     }
 
 }
