@@ -3,8 +3,6 @@
 
 自用工具库总结
 
-(修复报错)
-
 # Installing
 
 For the latest stable version:
